@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+
+  keycloak:
+    build: ./keycloak
+    environment:
+      DB_VENDOR: MYSQL
+      DB_ADDR: keycloak-db
+      DB_DATABASE: keycloak
+      DB_USER: keycloak
+      DB_PASSWORD: password
+    ports:
+      - 8080:8080
+    depends_on:
+      - keycloak-db
+
+  keycloak-db:
+    image: mysql:5.7
+    volumes:
+      - ./keycloak/db:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: keycloak
+      MYSQL_USER: keycloak
+      MYSQL_PASSWORD: password
+
+#  react-spa-keycloak:
+#    build: .
+#    ports:
+#      - 3000:3000
