@@ -5,6 +5,8 @@ services:
   keycloak:
     build: ./keycloak
     environment:
+      KEYCLOAK_USER: admin
+      KEYCLOAK_PASSWORD: password
       DB_VENDOR: MYSQL
       DB_ADDR: keycloak-db
       DB_DATABASE: keycloak
@@ -25,7 +27,7 @@ services:
       MYSQL_USER: keycloak
       MYSQL_PASSWORD: password
 
-#  react-spa-keycloak:
-#    build: .
-#    ports:
-#      - 3000:3000
+  react-spa-keycloak:
+    build: .
+    ports:
+      - 3000:3000
